@@ -1,43 +1,48 @@
-// Make the DIV element draggable:
-dragElement(document.getElementById("mydiv"));
+$(function () {
+  //what radio value did they select?
 
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
+  $("#formSubmit").on("click", (e) => {
+    //ii. Package the data
+    
     e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
+    
+    alert(
+      
+    //{`   "firstName": "John",
+    //"lastName": "Doe",
+    //"age": 25,
+    //"zipCode": "87946",
+    //"language": "html"`
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
 
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
+
+    );
+
+
+  });
+
+  $("input[type=radio]").on("change", function () {
+
+    let radioChoice = $("input[type=radio]:checked").val(); 
+
+    if (radioChoice === "Baked Goods!") {
+      $("#letterWordsSelect")
+        .empty()
+        .append(`<option value="Chocolate Chip Cookies">Baked Goods!</option>`)
+        .append(`<option value="Strawberry Cupcakes">Baked Goods!2</option>`)
+        .append(`<option value="Double Chocolate Fudge Brownies">Baked Goods!3</option>`);
+    } else if (radioChoice === "Cold Desserts!") {
+      //`<option value="${optValue}">${optText}</option>`
+
+      $("#letterWordsSelect")
+        .empty()
+        .append(`<option value="Vanilla Ice Cream">Chocolate Chip Cookies</option>`)
+        .append(`<option value="Cheesecake">Strawberry Cupcakes</option>`)
+        .append(`<option value="Peanut Butter Milkshake">Double Chocolate Fudge Brownies</option>`);
+    } else {
+      $("#letterWordsSelect")
+        .empty()
+        .append(`<option value="Chocolate Chip Cookies">Select a treat!`);
+    }
+  );
+);
